@@ -11,10 +11,12 @@ app.use('/api/bookings', require('./routes/bookingRoute'))
 
 const path = require('path');
 if(process.env.NODE_ENV === 'production'){
-    app.use('/',express.static('client'))
-
-    app.get('*', function (req, res) {
-        res.redirect('/login');});
+ 
+    app.get('/', function(req, res) {
+            res.sendFile(path.join(public, 'index.html'));
+        });
+        
+    app.use('/', express.static(public));
 }
 
 app.get('/', (req, res) => res.send('Hello World!'))
