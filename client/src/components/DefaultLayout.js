@@ -6,7 +6,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 const menu = (
   <Menu>
     <Menu.Item>
-      <a href="/" >Home</a>
+      <a href="/home" >Home</a>
     </Menu.Item>
     <Menu.Item>
       <a href="/userbookings" >Bookings</a>
@@ -16,9 +16,9 @@ const menu = (
     </Menu.Item>
     <Menu.Item onClick={() => {
       localStorage.removeItem('user')
-      window.location.href = '/login'
+      window.location.href = '/'
     }}>
-      <a href="#" >Logout</a>
+      <a href="/" >Logout</a>
     </Menu.Item>
   </Menu>
     

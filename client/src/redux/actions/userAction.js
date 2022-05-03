@@ -11,7 +11,7 @@ export const userLogin=(reqObj)=>async dispatch=>{
         message.success('Login success')
         dispatch({type: 'LOADING' , payload:false})
         setTimeout(() => {
-            window.location.href='/'
+            window.location.href='/home'
          
         }, 500);
     } catch (error) {
@@ -29,7 +29,7 @@ export const userRegister=(reqObj)=>async dispatch=>{
         const response = await axios.post('/api/users/register' , reqObj)
         message.success('Registration successfull')
         setTimeout(() => {
-            window.location.href='/login'
+            window.location.href='/'
          
         }, 500);
        
