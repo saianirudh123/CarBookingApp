@@ -9,15 +9,6 @@ app.use('/api/cars/', require('./routes/carsRoute'))
 app.use('/api/users/', require('./routes/userRoute'))
 app.use('/api/bookings', require('./routes/bookingRoute'))
 
-const path = require('path');
-if(process.env.NODE_ENV === 'production'){
- 
-    app.get('/', function(req, res) {
-            res.sendFile(path.join(public, 'index.html'));
-        });
-        
-    app.use('/', express.static(public));
-}
 
 app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(port, () => console.log(`Node js server started at  ${port}`));
