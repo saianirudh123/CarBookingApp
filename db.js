@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const connectDB = () => {
-    mongoose.connect('mongodb+srv://<username>:<password>@cluster0.6oyaw.mongodb.net/carbookingapp')
+    mongoose.connect('mongodb+srv://new_user_31:asdf123@cluster0.6oyaw.mongodb.net/carbookingapp')
 
 
     const connection = mongoose.connection;
