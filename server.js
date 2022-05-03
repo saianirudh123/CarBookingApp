@@ -11,7 +11,13 @@ app.use('/api/users/', require('./routes/userRoute'))
 app.use('/api/bookings', require('./routes/bookingRoute'))
 
 
+// Step 1:
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 
-app.get('/', (req, res) => res.send('Hello World!'))
+//app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Node js server started at  ${port}`));
