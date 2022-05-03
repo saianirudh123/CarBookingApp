@@ -11,6 +11,8 @@ app.use('/api/users/', require('./routes/userRoute'))
 app.use('/api/bookings', require('./routes/bookingRoute'))
 
 const publicPath = path.join(__dirname, '..', 'client/public');
+console.log(publicPath);
+
 app.use(express.static(publicPath));
 
 app.get('*', (req, res) => {
