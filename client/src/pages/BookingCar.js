@@ -1,4 +1,4 @@
-import { Col, Row, Divider, DatePicker, Checkbox, Modal } from "antd";
+import { Col, Row, Divider, DatePicker, Checkbox, Modal, message } from "antd";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
@@ -23,6 +23,7 @@ function BookingCar({ match }) {
   const [driver, setdriver] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  
 
   useEffect(() => {
     if (cars.length == 0) {
@@ -40,13 +41,44 @@ function BookingCar({ match }) {
   }, [driver, totalHours]);
 
   function selectTimeSlots(values) {
+    var flag = true;
     setFrom(moment(values[0]).format("MMM DD yyyy HH:mm"));
     setTo(moment(values[1]).format("MMM DD yyyy HH:mm"));
 
-    setTotalHours(values[1].diff(values[0], "hours"));
+    var from = moment(moment(values[0]).format("MMM DD yyyy HH:mm"));
+    var to = moment(moment(values[1]).format("MMM DD yyyy HH:mm"));
+
+    for(var booking of car.bookedTimeSlots) {
+      var a = moment(moment(booking.from).format("MMM DD yyyy HH:mm"));
+      var b = moment(moment(booking.to).format("MMM DD yyyy HH:mm"));
+
+      if(from.isBetween(a , b) ||
+      to.isBetween(a, b) || 
+      a.isBetween(from , to) ||
+      b.isBetween(from , to)
+      )
+      {
+          flag = false;
+          break;
+      }
+      else{
+          flag = true;
+      }
+
   }
 
-  
+    if(flag){
+      setTotalHours(values[1].diff(values[0], "hours"));
+      
+     
+    }else{
+      setTotalHours(0, "hours");
+      message.error("Car is already booked in the selected time slot. Please reselect")
+      
+    }
+
+    
+  }
 
   function onToken(token){
     const reqObj = {
